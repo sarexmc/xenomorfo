@@ -10,18 +10,19 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 21
+          java-version: '21'
 
-      # No hace falta gradle-wrapper.jar: instala Gradle 8.10 directamente
       - uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: 8.10
+          gradle-version: '8.10'
+
+      - name: Versiones (debe decir Gradle 8.10 y Java 21)
+        run: gradle --version
 
       - name: Compilar el mod
         run: gradle build --no-daemon
 
-      - name: Subir el jar
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: xenomorph-mod
           path: |
