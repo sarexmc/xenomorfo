@@ -49,7 +49,7 @@ public class XenoGoals {
 		public Grab(XenomorphEntity m) { this.m = m; setControls(EnumSet.of(Control.MOVE, Control.LOOK)); }
 		@Override public boolean canStart() { LivingEntity t = m.getTarget(); return t != null && t.isAlive() && m.getState() == XenomorphEntity.IDLE; }
 		@Override public boolean shouldContinue() { return canStart(); }
-		@Override public boolean shouldRunEveryTick() { return true; }
+		public boolean shouldRunEveryTick() { return true; }
 		@Override public void tick() {
 			LivingEntity t = m.getTarget();
 			if (t == null) return;
