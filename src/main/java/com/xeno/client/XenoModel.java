@@ -29,7 +29,7 @@ public final class XenoModel {
 	private static Quaternionf[] rot;
 	private static Matrix4f[] world;
 	private static boolean[] done;
-	private static final Matrix4f tmp = new Matrix4f(), local = new Matrix4f();
+	private static final Matrix4f tmp = new Matrix4f();
 	private static final Vector3f nrm = new Vector3f();
 	private static final Quaternionf q1 = new Quaternionf(), q2 = new Quaternionf();
 
@@ -94,9 +94,9 @@ public final class XenoModel {
 
 	private static void solve(int i) {
 		if (done[i]) return;
-		local.translation(tr[i]).rotate(rot[i]);
-		if (parent[i] >= 0) { solve(parent[i]); world[i].set(world[parent[i]]).mul(local); }
-		else world[i].set(local);
+		if (parent[i] >= 0) { solve(parent[i]); world[i].set(world[parent[i]]); }
+		else world[i].identity();
+		world[i].translate(tr[i]).rotate(rot[i]);
 		done[i] = true;
 	}
 
